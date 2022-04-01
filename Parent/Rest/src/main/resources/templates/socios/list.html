@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+  <head>
+    <title>Socios : Ver todos</title>
+  </head>
+  <body>
+    <h1 layout:fragment="header">Socios : Ver todos</h1>
+    <div layout:fragment="content" class="container">
+      <div class="pull-right">
+        <a href="form.html" th:href="@{/(form)}">Crear socio</a>
+       </div>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Fecha</td>
+            <td>Nombre</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:if="${socios.empty}">
+            <td colspan="3">
+              No hay socios
+            </td>
+          </tr>
+          <tr th:each="socio : ${socios}">
+            <td th:text="${socio.id}">1</td>
+            <td th:text="${#calendars.format(socio.created)}">
+              July 11, 2012 2:17:16 PM CDT
+            </td>
+            <td>
+              <a href="view.html"
+                  th:href="@{'/' + ${socio.id}}"
+                  th:text="${socio.nombre}">
+                El nombre
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
